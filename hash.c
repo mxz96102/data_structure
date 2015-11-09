@@ -25,6 +25,7 @@ void mk_index(){
 		if(p1==NULL)
 			printf("error");
 		p2->next=p1;
+		n++；
 	}
 }	
 

@@ -29,7 +29,7 @@ struct mylist*create(){				//to create a list with element num (use 0 to stop cr
 	p1=(struct mylist*)malloc(LENTH);
 	if(!scanf("%d",&safe)){
 		printf("illegal input!\n");
-		return;}
+		exit(1);}
 	p1->num=safe;
 	p1->next=NULL;
 	while(p1->num!=0){
@@ -41,7 +41,7 @@ struct mylist*create(){				//to create a list with element num (use 0 to stop cr
 		p1=(struct mylist*)malloc(LENTH);
 		if(!scanf("%d",&safe)){
 			printf("illegal input!\n");
-			return;
+			exit(1);
 		}
 		p1->num=safe;
 	}
@@ -85,12 +85,12 @@ void insert(struct mylist*pre){		//to insert after pre positon
 	temp=malloc(LENTH);
 	if(temp==NULL){
 		printf("insert error, out of space\n");
-		return;
+		exit(1);
 	}
 	printf("input the number");
 	if(!scanf("%d",&temp->num)){
 		printf("illeagal input\n");
-		return;}
+		exit(1);}
  	temp->next=pre->next;
 	pre->next=temp;
 }
@@ -135,7 +135,7 @@ void menu_1(){
 	printf("input the num you looking for");
 	if(!scanf("%d",&n)){
 		printf("illigal input\n");
-		return;}
+		exit(1);}
 	p=find(n,head);
 A:	if (p==NULL){
 		printf("404 not found\n");
@@ -143,7 +143,7 @@ A:	if (p==NULL){
 	printf("\twhat you gonna do?\n\t\t1.delete it\n\t\t2.insert one behind it\n\t\t3.find next one.\n\t\t4.exit\n");
 	if(!scanf("%d",&j)){
 		printf("illeagal input\n");
-		return;}	
+		exit(1);}	
 	switch(j){
 		case 1:
 			delete(p);

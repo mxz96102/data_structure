@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-struct node*head;
+struct node*head,*last;
 void create();
 void insert();
 void menu();
@@ -10,6 +10,7 @@ struct node{
 	int num;
 	struct node*left;
 	struct node*right;
+	struct node*pre;
 };
 
 
@@ -28,6 +29,10 @@ void create(){
 	p1=temp;
 	while(getchar()!=EOF)
 		insert();
+	p2=head;
+	while(p2->left!=NULL)
+		p2=p2->left;
+	last=p2;
 	printf("create complete\n");
 }
 
@@ -43,8 +48,10 @@ void insert(){
 		printf("meerror\n");
 		return;}
 	temp->num=n;
+
 	while(flag==0){
 	if((temp->num)<(p1->num)){
+		temp->pre=p1;
 		if(p1->left==NULL){
 			p1->left=temp;
 			flag=1;}
@@ -70,30 +77,28 @@ struct node*find_min(){
 	return p1;
 }
 
-struct node*find_pre(struct node*p1){
-	struct node*p2;
-	p2=head;
-	while(p2->left!=p1)
-		p2=p2->left;
-	return p2;
-}
 
 void delete(struct node*p1){
 	struct node*p2;
+	
 	if(p1==head){
+		last=head;
 		if((p1->right)==NULL){
 			printf("deleting head isnt allowed!\n");
-			return;}
+			exit(1);}
 		else{
 			p2=head;
 			head=head->right;
+			last=head;
 			free(p2);
 			}
 	}else {
-		p2=find_pre(p1);
+		p2=p1->pre;
 		p2->left=p1->right;
+		last=p2;
 		free(p1);
 		}
+	
 }
 
 void menu(){
